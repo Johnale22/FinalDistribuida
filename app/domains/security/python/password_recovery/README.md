@@ -1,0 +1,1 @@
+Este microservicio gestiona la recuperación de contraseñas. Se conecta con User Management para actualizar la contraseña del usuario cuando el usuario la recupere o cambie.
