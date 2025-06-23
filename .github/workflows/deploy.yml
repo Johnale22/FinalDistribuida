@@ -31,7 +31,15 @@ jobs:
           docker build -t tu_usuario/nombre_del_microservicio:v1 .
           docker push tu_usuario/nombre_del_microservicio:v1
 
-      # Desplegar a AWS (Terraform o AWS CLI)
+      # Configurar AWS CLI
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Desplegar a AWS (actualizar servicio ECS)
       - name: Deploy to AWS
         run: |
           aws ecs update-service --cluster tu-cluster --service tu-servicio --force-new-deployment
